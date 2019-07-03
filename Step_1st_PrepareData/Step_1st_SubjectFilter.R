@@ -47,7 +47,7 @@ subjid_df <- df[keeps]
 dim(subjid_df)
 detach(df)
 # Write out subject identifiers to CSV
-# Finally, we get 946 subjects
+# Finally, we get 693 subjects
 dir.create("/data/jux/BBL/projects/pncSingleFuncParcel/Replication/data");
 write.csv(subjid_df, "/data/jux/BBL/projects/pncSingleFuncParcel/Replication/data/pncSingleFuncParcel_n693_SubjectsIDs.csv", row.names=FALSE)
 
