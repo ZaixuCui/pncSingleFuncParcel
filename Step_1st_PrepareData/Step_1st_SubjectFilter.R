@@ -26,8 +26,8 @@ df <- merge(df, REST_qa, by=c("scanid","bblid"))
 df <- merge(df, nback_qa, by=c("scanid","bblid"))
 df <- merge(df, idemo_qa, by=c("scanid","bblid"))
 ## Define study sample using exclusion criteria
-# Health Exclude
-df <- df[which(df$healthExcludev2 == 0 & df$ltnExcludev2 == 0), ]
+# lth Exclude
+df <- df[which(df$ltnExcludev2 == 0), ]
 # FreeSurfer QA
 df <- df[which(df$fsFinalExclude == 0), ] 
 # REST QA
