@@ -72,10 +72,10 @@ def Ridge_KFold_RandomCV_MultiTimes(Subjects_Data, Subjects_Score, Fold_Quantity
     ResultantFile = os.path.join(ResultantFolder, 'Prediction_MultiTimesMean.mat');
     sio.savemat(ResultantFile, Res);
 
-def Ridge_KFold_RandomCV_MultiTimes_Sub(Subjects_Data_Mat_Path, Subjects_Score, Fold_Quantity, Alpha_Range, CVRepeatTimes, ResultantFolder, Parallel_Quantity, Permutation_Flag):
+def Ridge_KFold_RandomCV_MultiTimes_Sub(Subjects_Data_Mat_Path, Subjects_Score, Fold_Quantity, Alpha_Range, CVRepeatTimes_ForInner, ResultantFolder, Parallel_Quantity, Permutation_Flag):
     data = sio.loadmat(Subjects_Data_Mat_Path);
     Subjects_Data = data['Subjects_Data'];
-    Ridge_KFold_RandomCV(Subjects_Data, Subjects_Score, Fold_Quantity, Alpha_Range, CVRepeatTimes, ResultantFolder, Parallel_Quantity, Permutation_Flag);
+    Ridge_KFold_RandomCV(Subjects_Data, Subjects_Score, Fold_Quantity, Alpha_Range, CVRepeatTimes_ForInner, ResultantFolder, Parallel_Quantity, Permutation_Flag);
 
 def Ridge_KFold_RandomCV(Subjects_Data, Subjects_Score, Fold_Quantity, Alpha_Range, CVRepeatTimes_ForInner, ResultantFolder, Parallel_Quantity, Permutation_Flag):
 

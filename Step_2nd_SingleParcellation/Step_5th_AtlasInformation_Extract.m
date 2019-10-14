@@ -1,15 +1,15 @@
 
 clear
 
-SingleAtlasFolder = '/data/jux/BBL/projects/pncSingleFuncParcel/Replication/results/SingleParcellation/SingleParcel_1by1';
-ResultantFolder = '/data/jux/BBL/projects/pncSingleFuncParcel/Replication/results/SingleParcellation/SingleAtlas_Analysis';
+SingleAtlasFolder = '/data/jux/BBL/projects/pncSingleFuncParcel/Replication/Revision/SingleParcellation/SingleParcel_1by1';
+ResultantFolder = '/data/jux/BBL/projects/pncSingleFuncParcel/Replication/Revision/SingleParcellation/SingleAtlas_Analysis';
 mkdir(ResultantFolder);
 SubjectsFolder = '/share/apps/freesurfer/6.0.0/subjects/fsaverage5';
 % for surface data
-surfML = [SubjectsFolder '/label/lh.Medial_wall.label'];
+surfML = '/data/jux/BBL/projects/pncSingleFuncParcel/Replication/data/SNR_Mask/subjects/fsaverage5/lh.Mask_SNR.label';
 mwIndVec_l = read_medial_wall_label(surfML);
 Index_l = setdiff([1:10242], mwIndVec_l);
-surfMR = [SubjectsFolder '/label/rh.Medial_wall.label'];
+surfMR = '/data/jux/BBL/projects/pncSingleFuncParcel/Replication/data/SNR_Mask/subjects/fsaverage5/rh.Mask_SNR.label';
 mwIndVec_r = read_medial_wall_label(surfMR);
 Index_r = setdiff([1:10242], mwIndVec_r);
 
@@ -42,3 +42,4 @@ for i = 1:length(AllSubjects_AtlasLabelCell)
     save([FinalAtlasLabel_Folder '/' num2str(ID_Mat.ID) '.mat'], 'sbj_AtlasLabel_lh', 'sbj_AtlasLabel_rh', 'sbj_AtlasLabel_NoMedialWall');
     save([FinalAtlasLoading_Folder '/' num2str(ID_Mat.ID) '.mat'], 'sbj_AtlasLoading_lh', 'sbj_AtlasLoading_rh', 'sbj_AtlasLoading_NoMedialWall');
 end
+

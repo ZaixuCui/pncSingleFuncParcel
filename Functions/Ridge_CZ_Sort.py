@@ -10,7 +10,7 @@ from joblib import Parallel, delayed
 import statsmodels.formula.api as sm
 CodesPath = '/data/jux/BBL/projects/pncSingleFuncParcel/Replication/scripts_Final/Functions';
   
-def Ridge_KFold_Sort_Permutation(Subjects_Data, Subjects_Score, Times_IDRange, Fold_Quantity, Alpha_Range, ResultantFolder, Parallel_Quantity, Max_Queued, Queue):
+def Ridge_KFold_Sort_Permutation(Subjects_Data, Subjects_Score, Times_IDRange, Fold_Quantity, Alpha_Range, ResultantFolder, Parallel_Quantity, Max_Queued, Queue, Permutation_RandIndex_File_List=''):
     
     if not os.path.exists(ResultantFolder):
         os.makedirs(ResultantFolder)
@@ -25,8 +25,13 @@ def Ridge_KFold_Sort_Permutation(Subjects_Data, Subjects_Score, Times_IDRange, F
             os.makedirs(ResultantFolder_I)
         if not os.path.exists(ResultantFolder_I + '/Res_NFold.mat'):
             Times_IDRange_Todo = np.insert(Times_IDRange_Todo, len(Times_IDRange_Todo), Times_IDRange[i])
+
+            if Permutation_RandIndex_File_List != '':
+              Permutation_RandIndex_File = Permutation_RandIndex_File_List[i]
+            else:
+              Permutation_RandIndex_File = '';
             Configuration_Mat = {'Subjects_Data_Mat_Path': Subjects_Data_Mat_Path, 'Subjects_Score': Subjects_Score, 'Fold_Quantity': Fold_Quantity, \
-                'Alpha_Range': Alpha_Range, 'ResultantFolder_I': ResultantFolder_I, 'Parallel_Quantity': Parallel_Quantity};
+                'Alpha_Range': Alpha_Range, 'ResultantFolder_I': ResultantFolder_I, 'Parallel_Quantity': Parallel_Quantity, 'Permutation_RandIndex_File': Permutation_RandIndex_File};
             sio.savemat(ResultantFolder_I + '/Configuration.mat', Configuration_Mat)
             system_cmd = 'python3 -c ' + '\'import sys;\
                 sys.path.append("' + CodesPath + '");\
@@ -39,8 +44,9 @@ def Ridge_KFold_Sort_Permutation(Subjects_Data, Subjects_Score, Times_IDRange, F
                 Fold_Quantity = configuration["Fold_Quantity"];\
                 Alpha_Range = configuration["Alpha_Range"];\
                 ResultantFolder_I = configuration["ResultantFolder_I"];\
+                Permutation_RandIndex_File = configuration["Permutation_RandIndex_File"];\
                 Parallel_Quantity = configuration["Parallel_Quantity"];\
-                Ridge_KFold_Sort_Permutation_Sub(Subjects_Data_Mat_Path[0], Subjects_Score[0], Fold_Quantity[0][0], Alpha_Range[0], ResultantFolder_I[0], Parallel_Quantity[0][0])\' ';
+                Ridge_KFold_Sort_Permutation_Sub(Subjects_Data_Mat_Path[0], Subjects_Score[0], Fold_Quantity[0][0], Alpha_Range[0], ResultantFolder_I[0], Parallel_Quantity[0][0], Permutation_RandIndex_File)\' ';
             system_cmd = system_cmd + ' > "' + ResultantFolder_I + '/perm_' + str(Times_IDRange[i]) + '.log" 2>&1\n'
             Finish_File.append(ResultantFolder_I + '/Res_NFold.mat')
             script = open(ResultantFolder_I + '/script.sh', 'w')  
@@ -77,12 +83,12 @@ def Ridge_KFold_Sort_Permutation(Subjects_Data, Subjects_Score, Times_IDRange, F
             if Max_Queued + Finished_Quantity >= len(Finish_File):
                 break
 
-def Ridge_KFold_Sort_Permutation_Sub(Subjects_Data_Mat_Path, Subjects_Score, Fold_Quantity, Alpha_Range, ResultantFolder, Parallel_Quantity):
+def Ridge_KFold_Sort_Permutation_Sub(Subjects_Data_Mat_Path, Subjects_Score, Fold_Quantity, Alpha_Range, ResultantFolder, Parallel_Quantity, Permutation_RandIndex_File=''):
     data = sio.loadmat(Subjects_Data_Mat_Path)
     Subjects_Data = data['Subjects_Data']
-    Ridge_KFold_Sort(Subjects_Data, Subjects_Score, Fold_Quantity, Alpha_Range, ResultantFolder, Parallel_Quantity, 1);
+    Ridge_KFold_Sort(Subjects_Data, Subjects_Score, Fold_Quantity, Alpha_Range, ResultantFolder, Parallel_Quantity, 1, Permutation_RandIndex_File);
 
-def Ridge_KFold_Sort(Subjects_Data, Subjects_Score, Fold_Quantity, Alpha_Range, ResultantFolder, Parallel_Quantity, Permutation_Flag):
+def Ridge_KFold_Sort(Subjects_Data, Subjects_Score, Fold_Quantity, Alpha_Range, ResultantFolder, Parallel_Quantity, Permutation_Flag, Permutation_RandIndex_File=''):
 
     if not os.path.exists(ResultantFolder):
             os.makedirs(ResultantFolder)
@@ -116,9 +122,15 @@ def Ridge_KFold_Sort(Subjects_Data, Subjects_Score, Fold_Quantity, Alpha_Range, 
 
         if Permutation_Flag:
             # If do permutation, the training scores should be permuted, while the testing scores remain
-            Subjects_Index_Random = np.arange(len(Subjects_Score_train))
-            np.random.shuffle(Subjects_Index_Random)
-            Subjects_Score_train = Subjects_Score_train[Subjects_Index_Random]
+            if len(Permutation_RandIndex_File) == 0:
+                Subjects_Index_Random = np.arange(len(Subjects_Score_train))
+                np.random.shuffle(Subjects_Index_Random)
+                Subjects_Score_train = Subjects_Score_train[Subjects_Index_Random]
+            else:
+                tmpData = sio.loadmat(Permutation_RandIndex_File[0]);
+                Subjects_Index_Random = tmpData['Fold_' + str(j)];
+                Subjects_Score_train = Subjects_Score_train[Subjects_Index_Random[0]]
+
             if j == 0:
                 RandIndex = {'Fold_0': Subjects_Index_Random}
             else:
@@ -139,8 +151,9 @@ def Ridge_KFold_Sort(Subjects_Data, Subjects_Score, Fold_Quantity, Alpha_Range, 
         Fold_Corr.append(Fold_J_Corr)
         Fold_J_MAE = np.mean(np.abs(np.subtract(Fold_J_Score,Subjects_Score_test)))
         Fold_MAE.append(Fold_J_MAE)
-    
-        Fold_J_result = {'Index':Sorted_Index[Fold_J_Index], 'Test_Score':Subjects_Score_test, 'Predict_Score':Fold_J_Score, 'Corr':Fold_J_Corr, 'MAE':Fold_J_MAE, 'alpha':Optimal_Alpha, 'Inner_Corr':Inner_Corr, 'Inner_MAE_inv':Inner_MAE_inv}
+     
+        Weight = clf.coef_ / np.sqrt(np.sum(clf.coef_ **2))    
+        Fold_J_result = {'Index':Sorted_Index[Fold_J_Index], 'Test_Score':Subjects_Score_test, 'Predict_Score':Fold_J_Score, 'Corr':Fold_J_Corr, 'MAE':Fold_J_MAE, 'alpha':Optimal_Alpha, 'Inner_Corr':Inner_Corr, 'Inner_MAE_inv':Inner_MAE_inv, 'w_Brain':Weight}
         Fold_J_FileName = 'Fold_' + str(j) + '_Score.mat'
         ResultantFile = os.path.join(ResultantFolder, Fold_J_FileName)
         sio.savemat(ResultantFile, Fold_J_result)

@@ -4,8 +4,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 clear
 ReplicationFolder = '/cbica/projects/pncSingleFuncParcel/Replication';
-ResultsFolder = [ReplicationFolder '/results'];
-HongmingLabel_Folder = [ResultsFolder '/SingleAtlas_Analysis/FinalAtlasLabel'];
+ResultsFolder = [ReplicationFolder '/Revision'];
+HongmingLabel_Folder = [ResultsFolder '/SingleParcellation/SingleAtlas_Analysis/FinalAtlasLabel'];
 Demogra_Info = csvread([ReplicationFolder '/data/pncSingleFuncParcel_n693_SubjectsIDs.csv'],1);
 BBLID = Demogra_Info(:, 1);
 
@@ -57,7 +57,7 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 clear
 ReplicationFolder = '/cbica/projects/pncSingleFuncParcel/Replication';
-ResultsFolder = [ReplicationFolder '/results'];
+ResultsFolder = [ReplicationFolder '/Revision'];
 HongmingSpin_Folder = [ResultsFolder '/Atlas_Homogeneity_Reliability/PermuteData_SpinTest/PermuteData'];
 Demogra_Info = csvread([ReplicationFolder '/data/pncSingleFuncParcel_n693_SubjectsIDs.csv'],1);
 BBLID = Demogra_Info(:, 1);
@@ -67,6 +67,14 @@ mkdir(ResultantFolder);
 Combined_DataFolder = [ReplicationFolder '/data/CombinedData'];
 for i = 1:length(BBLID)
   i
+
+  [~, JobRunning_Number_Str] = system('qstat | wc -l');
+  JobRunning_Number = str2num(JobRunning_Number_Str(1:2));
+  while JobRunning_Number > 32
+    [~, JobRunning_Number_Str] = system('qstat | wc -l');
+    JobRunning_Number = str2num(JobRunning_Number_Str(1:2));
+  end
+
   HongmingSpin_Mat_Path = [HongmingSpin_Folder '/AtlasLabel_Perm_' num2str(BBLID(i)) '.mat'];
   Image_lh_Path = [Combined_DataFolder '/' num2str(BBLID(i)) '/lh.fs5.sm6.residualised.mgh'];
   Image_rh_Path = [Combined_DataFolder '/' num2str(BBLID(i)) '/rh.fs5.sm6.residualised.mgh'];
@@ -114,7 +122,7 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 clear
 ReplicationFolder = '/cbica/projects/pncSingleFuncParcel/Replication/';
-AtlasSimilarityFolder = [ReplicationFolder '/results/Atlas_Homogeneity_Reliability'];
+AtlasSimilarityFolder = [ReplicationFolder '/Revision/Atlas_Homogeneity_Reliability'];
 ARI_Hongming_Kong_Actual = load([AtlasSimilarityFolder '/ARI_Hongming_Kong.mat']);
 
 ID_Info = csvread([ReplicationFolder '/data/pncSingleFuncParcel_n693_SubjectsIDs.csv'], 1, 0);

@@ -6,7 +6,7 @@
 
 clear
 
-projectFolder = '/cbica/projects/pncSingleFuncParcel/Replication/results/SingleParcellation';
+projectFolder = '/cbica/projects/pncSingleFuncParcel/Replication/Revision/SingleParcellation';
 resultantFolder = [projectFolder '/RobustInitialization'];
 mkdir(resultantFolder);
 inFile = [resultantFolder '/ParcelInit_List.txt'];

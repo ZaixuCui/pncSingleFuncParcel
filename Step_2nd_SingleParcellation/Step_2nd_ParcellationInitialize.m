@@ -8,7 +8,7 @@
 clear
 
 ReplicationFolder = '/cbica/projects/pncSingleFuncParcel/Replication';
-ParcellationFolder = [ReplicationFolder '/results/SingleParcellation'];
+ParcellationFolder = [ReplicationFolder '/Revision/SingleParcellation'];
 InitializationFolder = [ParcellationFolder '/Initialization'];
 mkdir(InitializationFolder);
 mkdir([InitializationFolder '/Input']);
@@ -23,8 +23,8 @@ SubjectsFolder = '/cbica/software/external/freesurfer/centos7/5.3.0/subjects/fsa
 % for surface data
 surfL = [SubjectsFolder '/surf/lh.pial'];
 surfR = [SubjectsFolder '/surf/rh.pial'];
-surfML = [SubjectsFolder '/label/lh.Medial_wall.label'];
-surfMR = [SubjectsFolder '/label/rh.Medial_wall.label'];
+surfML = '/cbica/projects/pncSingleFuncParcel/Replication/data/SNR_Mask/lh.Mask_SNR.label';
+surfMR = '/cbica/projects/pncSingleFuncParcel/Replication/data/SNR_Mask/rh.Mask_SNR.label';
 
 spaR = 1;
 vxI = 1;

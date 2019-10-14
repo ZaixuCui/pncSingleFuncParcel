@@ -1,7 +1,7 @@
 
 clear
 ReplicationFolder = '/cbica/projects/pncSingleFuncParcel/Replication';
-ResultsFolder = [ReplicationFolder '/results'];
+ResultsFolder = [ReplicationFolder '/Revision'];
 Demogra_Info = csvread([ReplicationFolder '/data/pncSingleFuncParcel_n693_SubjectsIDs.csv'],1);
 BBLID = Demogra_Info(:, 1);
 

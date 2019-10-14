@@ -6,7 +6,7 @@
 
 clear
 
-ProjectFolder = '/cbica/projects/pncSingleFuncParcel/Replication/results/SingleParcellation';
+ProjectFolder = '/cbica/projects/pncSingleFuncParcel/Replication/Revision/SingleParcellation';
 ResultantFolder = [ProjectFolder '/SingleParcel_1by1'];
 mkdir(ResultantFolder);
 
@@ -27,8 +27,8 @@ parforOn = 0;
 
 SubjectsFolder = '/cbica/software/external/freesurfer/centos7/5.3.0/subjects/fsaverage5';
 % for surface data
-surfML = [SubjectsFolder '/label/lh.Medial_wall.label'];
-surfMR = [SubjectsFolder '/label/rh.Medial_wall.label'];
+surfML = '/cbica/projects/pncSingleFuncParcel/Replication/data/SNR_Mask/lh.Mask_SNR.label';
+surfMR = '/cbica/projects/pncSingleFuncParcel/Replication/data/SNR_Mask/rh.Mask_SNR.label';
 
 RawDataFolder = '/cbica/projects/pncSingleFuncParcel/Replication/data/CombinedData';
 LeftCell = g_ls([RawDataFolder '/*/lh.fs5.sm6.residualised.mgh']);
@@ -67,6 +67,7 @@ for i = 1:length(LeftCell)
         fid = fopen(ScriptPath, 'w');
         fprintf(fid, cmd);
         system(['sh ' ScriptPath]);
+        pause(1);
     end
 end
 

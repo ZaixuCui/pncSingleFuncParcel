@@ -2,7 +2,7 @@
 library(R.matlab)
 
 ReplicationFolder = '/data/jux/BBL/projects/pncSingleFuncParcel/Replication';
-ResultsFolder = paste0(ReplicationFolder, '/results');
+ResultsFolder = paste0(ReplicationFolder, '/Revision');
 ID_CSV = read.csv(paste0(ReplicationFolder, '/data/pncSingleFuncParcel_n693_SubjectsIDs.csv'));
 BBLID = ID_CSV$bblid;
 ################

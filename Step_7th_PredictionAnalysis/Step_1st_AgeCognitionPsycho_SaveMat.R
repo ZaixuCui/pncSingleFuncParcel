@@ -18,8 +18,8 @@ F1_Exec_Comp_Res_Accuracy <- AllInfo$F1_Exec_Comp_Res_Accuracy;
 F3_Memory_Accuracy <- AllInfo$F3_Memory_Accuracy;
 F2_Social_Cog_Accuracy <- AllInfo$F2_Social_Cog_Accuracy;
 
-dir.create(paste0(ReplicationFolder, '/results/PredictionAnalysis'));
-writeMat(paste0(ReplicationFolder, '/results/PredictionAnalysis/Behavior_693.mat'), 
+dir.create(paste0(ReplicationFolder, '/Revision/PredictionAnalysis'));
+writeMat(paste0(ReplicationFolder, '/Revision/PredictionAnalysis/Behavior_693.mat'), 
     BBLID = BBLID, AgeYears = AgeYears, Sex = Sex, Motion = Motion,
     F1_Exec_Comp_Res_Accuracy = F1_Exec_Comp_Res_Accuracy, F3_Memory_Accuracy = F3_Memory_Accuracy, F2_Social_Cog_Accuracy = F2_Social_Cog_Accuracy);
 

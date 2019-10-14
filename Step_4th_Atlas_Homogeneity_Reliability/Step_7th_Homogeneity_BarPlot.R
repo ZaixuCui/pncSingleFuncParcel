@@ -3,7 +3,7 @@ library(R.matlab)
 library(ggplot2)
 
 ReplicationFolder = '/data/jux/BBL/projects/pncSingleFuncParcel/Replication';
-ResultsFolder = paste0(ReplicationFolder, '/results');
+ResultsFolder = paste0(ReplicationFolder, '/Revision');
 ID_CSV = read.csv(paste0(ReplicationFolder, '/data/pncSingleFuncParcel_n693_SubjectsIDs.csv'));
 BBLID = ID_CSV$bblid;
 
@@ -44,7 +44,7 @@ tmp = data.frame(Homogeneity = Homogeneity, Label = Label);
 tmp$Label <- factor(tmp$Label, levels = c(1:5), labels = c("Indiv. NMF", "Indiv. MS-HBM", "Group NMF", "Yeo 17", "Null Distribution"));
 Fig <- ggplot(tmp, aes(x = Label, y = Homogeneity)) + geom_jitter(color = "#C0C0C0") + geom_boxplot(alpha = 0.1, lwd = 0.8, outlier.size = NA);
 Fig <- Fig + labs(x = "", y = "Within-network Homogeneity") + theme_classic()
-Fig <- Fig + theme(axis.text.x = element_text(size = 17, colour = "black"), axis.text.y = element_text(size = 25, colour = "black"), axis.title = element_text(size = 23));
+Fig <- Fig + theme(axis.text.x = element_text(size = 17, colour = "black"), axis.text.y = element_text(size = 19, colour = "black"), axis.title = element_text(size = 19));
 Fig <- Fig + scale_y_continuous(limits = c(0, 0.45), breaks = c(0, 0.1, 0.2, 0.3, 0.4), expand = c(0, 0));
 Fig + theme(axis.text.x = element_text(angle = 45, hjust = 1))
-ggsave('/data/jux/BBL/projects/pncSingleFuncParcel/Replication/results/Figures/Homogeneity_hist.tiff', width = 17, height = 15, dpi = 600, units = "cm");
+ggsave('/data/jux/BBL/projects/pncSingleFuncParcel/Replication/Revision/Figures/Homogeneity_hist.tiff', width = 17, height = 15, dpi = 600, units = "cm");

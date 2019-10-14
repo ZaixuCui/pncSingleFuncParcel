@@ -1,7 +1,7 @@
 
 clear
 ReplicationFolder = '/cbica/projects/pncSingleFuncParcel/Replication';
-ResultsFolder = [ReplicationFolder '/results'];
+ResultsFolder = [ReplicationFolder '/Revision'];
 KongLabel_Folder = [ResultsFolder '/SingleParcellation_Kong/WorkingFolder/ind_parcellation_200_30'];
 Demogra_Info = csvread([ReplicationFolder '/data/pncSingleFuncParcel_n693_SubjectsIDs.csv'],1);
 BBLID = Demogra_Info(:, 1);
@@ -22,7 +22,7 @@ for i = 1:length(BBLID)
     LogFolder = [ResultantFolder '/logs'];
     mkdir(LogFolder);
     ScriptPath = [ScriptFolder '/Homogeneity_Script_' num2str(i) '.sh'];
-    Cmd = ['qsub-run --sge "-l h_vmem=10G" matlab -nosplash -nodesktop -r ' ...
+    Cmd = ['/cbica/software/external/matlab/R2018A/bin/matlab -nosplash -nodesktop -r ' ...
           '"addpath(genpath(''' ReplicationFolder '/Toolbox''));' ...
           'KongLabel_Data = load(''' Kong_Mat_Path ''');' ...
           'sbj_AtlasLabel = [KongLabel_Data.lh_labels KongLabel_Data.rh_labels];' ... 
@@ -45,7 +45,7 @@ for i = 1:length(BBLID)
           LogFolder '/log_' num2str(i) '" 2>&1'];
     fid = fopen(ScriptPath, 'w');
     fprintf(fid, Cmd);
-    system(['sh ' ScriptPath]);
+    system(['qsub -l h_vmem=30G ' ScriptPath]);
   end
 end
 
