@@ -19,7 +19,7 @@ for i = 1:1000
   i
   % Removing medial wall & low signal regions in permuted data
   NonZeroIndex_Both = intersect(NonZeroIndex, find(GroupAtlasLabel_Spin(:, i) ~= 0));
-  ARI_HongmingGroupSpin_Yeo17(i) = rand_index(GroupAtlasLabel_Spin(NonZeroIndex, i), Yeo17_Label(NonZeroIndex), 'adjusted');
+  ARI_HongmingGroupSpin_Yeo17(i) = rand_index(GroupAtlasLabel_Spin(NonZeroIndex_Both, i), Yeo17_Label(NonZeroIndex_Both), 'adjusted');
 end
 
 ARI_HongmingGroup_Yeo17_PValue = length(find(ARI_HongmingGroupSpin_Yeo17 > ARI_HongmingGroup_Yeo17)) / 1000;
