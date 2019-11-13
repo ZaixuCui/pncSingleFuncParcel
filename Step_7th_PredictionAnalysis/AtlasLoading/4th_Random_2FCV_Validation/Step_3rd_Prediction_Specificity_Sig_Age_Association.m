@@ -7,7 +7,7 @@ AgePrediction_ResFolder = [PredictionFolder ...
 Behavior = load([PredictionFolder '/Behavior_693.mat']);
 AgePrediction_SomatoSensory_ResFolder = [PredictionFolder ...
     '/AtlasLoading_RandomCV_Validation/2Fold_RandomCV_Age_SomatoSensory'];
-for i = 1:99
+for i = 0:99
     i
     Prediction_Fold0 = load([AgePrediction_ResFolder '/Time_' num2str(i) '/Fold_0_Score.mat']);
     MAE_Actual_Fold0 = Prediction_Fold0.MAE;
@@ -33,7 +33,7 @@ for i = 1:99
     [ParCorr_Actual_Fold1, ~] = partialcorr(Prediction_Fold1.Predict_Score', Age_Fold1, ...
           [double(Sex_Fold1) double(Motion_Fold1) double(AgePrediction_Fold1_SomatoSensory.Predict_Score')]);
 
-    ParCorr_Actual_Mean(i) = mean([ParCorr_Actual_Fold0 ParCorr_Actual_Fold1]);
+    ParCorr_Actual_Mean(i + 1) = mean([ParCorr_Actual_Fold0 ParCorr_Actual_Fold1]);
 end
 save([AgePrediction_ResFolder '/ParCorr.mat'], 'ParCorr_Actual_Mean');
 
