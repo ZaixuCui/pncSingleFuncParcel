@@ -124,7 +124,7 @@ for (i in c(1:1000))
   Perm_Corr_7Networks_17Networks[i] = tmp_data$estimate;
 }
 P_Value = length(which(Perm_Corr_7Networks_17Networks >= Actual_Corr_7Networks_17Networks)) / 1000;
-print(paste0('P value (variability vs. age prediction weights): ', as.character(P_Value)));
+print(paste0('P value (17 networks (age weights) vs. 7 networks (age weights)): ', as.character(P_Value)));
 
 # EFWeights 17 networks vs. EFWeights 7 networks
 tmp_data = cor.test(as.numeric(Data_Mat$EFWeights.All.NoMedialWall),
@@ -141,5 +141,5 @@ for (i in c(1:1000))
   Perm_Corr_7Networks_17Networks[i] = tmp_data$estimate;
 }
 P_Value = length(which(Perm_Corr_7Networks_17Networks >= Actual_Corr_7Networks_17Networks)) / 1000;
-print(paste0('P value (variability vs. age prediction weights): ', as.character(P_Value)));
+print(paste0('P value (17 networks (EF weights) vs. 7 networks (EF weights)): ', as.character(P_Value)));
 
