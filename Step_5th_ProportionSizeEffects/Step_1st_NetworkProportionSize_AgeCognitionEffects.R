@@ -33,13 +33,11 @@ Gam_Z_Vector_Age_WholeNetworkSum <- matrix(0, 1, 17);
 Gam_P_Vector_Age_WholeNetworkSum <- matrix(0, 1, 17);
 Gam_P_Vector_Cognition_WholeNetworkSum <- matrix(0, 1, 17);
 Gam_Z_Vector_Cognition_WholeNetworkSum <- matrix(0, 1, 17);
-NetworkSize_Variability <- matrix(0, 1, 17);
 for (i in 1:17)
 {
   print(paste0('Network_', as.character(i)));
   Data_I = Data_All[,,i];
   WholeNetworkSum = as.numeric(rowSums(Data_I));
-  NetworkSize_Variability[i] = sd(WholeNetworkSum); 
   # Effects of network size 
   Gam_Analysis_WholeNetworkSum <- gam(WholeNetworkSum ~ s(AgeYears, k=4) + Sex_factor + Motion, method = "REML", data = Behavior_New);
   Gam_P_Vector_Age_WholeNetworkSum[i] = summary(Gam_Analysis_WholeNetworkSum)$s.table[4];

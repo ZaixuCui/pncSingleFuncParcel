@@ -84,9 +84,7 @@ for (i in c(1:17)){
         geom_smooth(data = data_Age, aes(x = Loading_Data, y = AgeWeight_Data), method = lm, color = "#FFFFFF", linetype = "dashed") +
         theme_classic() + labs(x = "Network Loading", y = "Contribution Weight") +
         theme(axis.text=element_text(size=35, color='black'), axis.title=element_text(size=35), aspect.ratio = 1) +
-#        theme(legend.text = element_text(size = 40), legend.title = element_text(size = 40)) +
-#        theme(legend.justification = c(1, 1), legend.position = LegendPosition) +
-        theme(legend.position = 'none') + 
+#        theme(legend.position = 'none') + 
         scale_x_continuous(limits = c(-0.000001, 1.1), breaks = c(0, 0.5, 1)) +
         scale_y_continuous(limits = YLimits, breaks = YBreaks);
     FileName = paste0(FigureFolder, '/Network_', as.character(i), '.tiff');
@@ -146,7 +144,6 @@ ggplot() +
     theme(axis.text=element_text(size=30, color='black'), axis.title=element_text(size=30), aspect.ratio = 1) +
     theme(legend.text = element_text(size = 30), legend.title = element_text(size = 30)) +
     theme(legend.justification = c(1, 1), legend.position = c(1, 1)) +
-    #theme(legend.position = 'none') +
     scale_x_continuous(limits = c(-0.000001, 1.1), breaks = c(0, 0.5, 1)) +
     scale_y_continuous(limits = YLimits, breaks = YBreaks);
 FileName = paste0(FigureFolder, '/Network_', as.character(i), '_MainFigure.tiff');
