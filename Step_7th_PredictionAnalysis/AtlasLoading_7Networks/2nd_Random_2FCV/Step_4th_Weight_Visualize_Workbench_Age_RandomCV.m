@@ -26,11 +26,11 @@ load([PredictionFolder '/AtlasLoading_All_RemoveZero.mat']); % NonZeroIndex was 
 % Age Prediction %
 %%%%%%%%%%%%%%%%%%
 VertexQuantity = 17734;
-%% Display sum absolute weight of the 17 maps
-w_Brain_Age_All = zeros(1, 17734*17);
+%% Display sum absolute weight of the 7 maps
+w_Brain_Age_All = zeros(1, 17734*7);
 w_Brain_Age_All(NonZeroIndex) = w_Brain_Age;
 %% Display weight of all regions
-for i = 1:17
+for i = 1:7
     w_Brain_Age_Matrix(i, :) = w_Brain_Age_All([(i - 1) * VertexQuantity + 1 : i * VertexQuantity]);
 end
 save([VisualizeFolder '/w_Brain_Age_Matrix.mat'], 'w_Brain_Age_Matrix');
@@ -58,5 +58,4 @@ cmd = ['wb_command -cifti-create-dense-scalar ' VisualizeFolder '/w_Brain_Age_Ab
 system(cmd);
 pause(1);
 system(['rm -rf ' V_lh_File ' ' V_rh_File]);
-
 

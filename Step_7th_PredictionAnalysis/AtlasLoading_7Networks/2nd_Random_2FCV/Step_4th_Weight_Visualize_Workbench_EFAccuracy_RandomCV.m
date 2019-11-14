@@ -26,15 +26,15 @@ load([PredictionFolder '/AtlasLoading_All_RemoveZero.mat']); % NonZeroIndex was 
 %%%%%%%%%%%%%%%%%%
 VertexQuantity = 17734;
 % Absolute sum weights
-w_Brain_EFAccuracy_All = zeros(1, 17734*17);
+w_Brain_EFAccuracy_All = zeros(1, 17734*7);
 w_Brain_EFAccuracy_All(NonZeroIndex) = w_Brain_EFAccuracy;
 %% Display weight of all regions
-for i = 1:17
+for i = 1:7
     w_Brain_EFAccuracy_Matrix(i, :) = w_Brain_EFAccuracy_All([(i - 1) * VertexQuantity + 1 : i * VertexQuantity]);
 end
 save([VisualizeFolder '/w_Brain_EFAccuracy_Matrix.mat'], 'w_Brain_EFAccuracy_Matrix');
 
-%% Display sum absolute weight of the 17 maps
+%% Display sum absolute weight of the 7 maps
 w_Brain_EFAccuracy_Abs_sum = sum(abs(w_Brain_EFAccuracy_Matrix));
 w_Brain_EFAccuracy_Abs_sum_lh = zeros(10242, 1);
 w_Brain_EFAccuracy_Abs_sum_lh(Index_l) = w_Brain_EFAccuracy_Abs_sum(1:length(Index_l));
