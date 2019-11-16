@@ -29,8 +29,8 @@ Behavior_Fold1 = data.frame(Age = as.numeric(Behavior$Age[Index_Fold1]));
 Behavior_Fold1$Sex = as.numeric(Behavior$Sex[Index_Fold1]);
 Behavior_Fold1$Motion = as.numeric(Behavior$Motion[Index_Fold1]);
 
-Color_Fold0 = '#7F7F7F'; #'#000000'; #'#FF5252';
-Color_Fold1 = '#000000'; #'#7F7F7F'; #'#448AFF';
+Color_Fold0 = '#7F7F7F'; 
+Color_Fold1 = '#000000';
 
 # Fold 1
 Energy_lm <- lm(PredictScore_Fold1 ~ Age + Sex + Motion, data = Behavior_Fold1);
