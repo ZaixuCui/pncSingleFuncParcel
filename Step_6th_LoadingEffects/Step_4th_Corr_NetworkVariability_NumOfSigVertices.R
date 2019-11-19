@@ -29,7 +29,7 @@ ggplot(data, aes(NetworkVariability, NumOfSigVertices_Univariate_EF)) +
     theme(axis.text=element_text(size = 30, color = 'black'), axis.title = element_text(size = 30)) +
     scale_y_continuous(limits = c(0, 1010), breaks = c(0, 400, 800), label = c("0", "400", "800")) +
     scale_x_continuous(limits = c(0.009, 0.035), breaks = c(0.010, 0.020, 0.030)) +
-    geom_point(color = '#000000', size = 1.5) +
+    geom_point(color = '#000000', size = 2.5) +
     labs(x = "Network Variability", y = 'Number of Sig Vertices')
 ggsave('/data/jux/BBL/projects/pncSingleFuncParcel/Replication/Revision/Figures/NetworkVariability_EFEffects_Univariate.tiff', width = 19, height = 15, dpi = 600, units = "cm");
 
