@@ -31,7 +31,7 @@ AllSubsets_BBLID = {BBLID(Sorted_Index(1:100)), ...
 %
 LoadingFolder = [WorkingFolder '/FinalAtlasLoading'];
 LabelFolder = [WorkingFolder '/FinalAtlasLabel'];
-NetworkRefinement_Folder = [WorkingFolder '/NetworkRefinement'];
+NetworkRefinement_Folder = [WorkingFolder '/NetworkRefinement_2'];
 mkdir(NetworkRefinement_Folder);
 for i = 1:2
   SubsetBBLID = AllSubsets_BBLID{i};
