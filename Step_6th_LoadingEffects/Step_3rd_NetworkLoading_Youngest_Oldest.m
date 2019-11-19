@@ -31,7 +31,7 @@ AllSubsets_BBLID = {BBLID(Sorted_Index(1:100)), ...
 %
 LoadingFolder = [WorkingFolder '/FinalAtlasLoading'];
 LabelFolder = [WorkingFolder '/FinalAtlasLabel'];
-NetworkRefinement_Folder = [WorkingFolder '/NetworkRefinement'];
+NetworkRefinement_Folder = [WorkingFolder '/NetworkRefinement_2'];
 mkdir(NetworkRefinement_Folder);
 for i = 1:2
   SubsetBBLID = AllSubsets_BBLID{i};
@@ -57,22 +57,6 @@ for i = 1:2
     eval(cmd);
     cmd = ['GroupLoading_rh(' num2str(j) ', :) = mean(sbj_Loading_rh_Matrix_' num2str(j) ');'];
     eval(cmd);
-    
-    % write to files
-    V_lh = gifti;
-    V_lh.cdata = GroupLoading_lh(j, :)';
-    V_lh_File = [NetworkRefinement_Folder '/GroupLoading_lh_Network_' num2str(j) '_AgeGroup_' num2str(i) '.func.gii'];
-    save(V_lh, V_lh_File);
-    V_rh = gifti;
-    V_rh.cdata = GroupLoading_rh(j, :)';
-    V_rh_File = [NetworkRefinement_Folder '/GroupLoading_rh_Network_' num2str(j) '_AgeGroup_' num2str(i) '.func.gii'];
-    save(V_rh, V_rh_File);
-    % convert into cifti file
-    cmd = ['wb_command -cifti-create-dense-scalar ' NetworkRefinement_Folder '/GroupLoading_Network_' num2str(j) ...
-           '_AgeGroup_' num2str(i) '.dscalar.nii -left-metric ' V_lh_File ' -right-metric ' V_rh_File];
-    system(cmd);
-    pause(1);
-    system(['rm -rf ' V_lh_File ' ' V_rh_File]);
   end
 
   %%%%%%%%%%%%%%%%%%%%%
