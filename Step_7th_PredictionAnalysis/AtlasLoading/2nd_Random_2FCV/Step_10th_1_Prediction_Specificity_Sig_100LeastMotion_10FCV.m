@@ -3,14 +3,14 @@ clear
 
 % Motion prediction
 ReplicationFolder = '/cbica/projects/pncSingleFuncParcel/Replication';
-MotionPrediction_ResFolder_231LeastMotion = [ReplicationFolder '/Revision/PredictionAnalysis/AtlasLoading/2Fold_RandomCV_Motion_231LeastMotion_10FCV'];
-Behavior = load([MotionPrediction_ResFolder_231LeastMotion '/data.mat']);
+MotionPrediction_ResFolder_100LeastMotion = [ReplicationFolder '/Revision/PredictionAnalysis/AtlasLoading/2Fold_RandomCV_Motion_100LeastMotion_10FCV'];
+Behavior = load([MotionPrediction_ResFolder_100LeastMotion '/data.mat']);
 for i = 0:99
     i
-    Prediction_Fold0 = load([MotionPrediction_ResFolder_231LeastMotion '/Time_' num2str(i) '/Fold_0_Score.mat']);
+    Prediction_Fold0 = load([MotionPrediction_ResFolder_100LeastMotion '/Time_' num2str(i) '/Fold_0_Score.mat']);
     MAE_Actual_Fold0 = Prediction_Fold0.MAE;
     Index_Fold0 = Prediction_Fold0.Index + 1;
-    Prediction_Fold1 = load([MotionPrediction_ResFolder_231LeastMotion '/Time_' num2str(i) '/Fold_1_Score.mat']);
+    Prediction_Fold1 = load([MotionPrediction_ResFolder_100LeastMotion '/Time_' num2str(i) '/Fold_1_Score.mat']);
     MAE_Actual_Fold1 = Prediction_Fold1.MAE;
     Index_Fold1 = Prediction_Fold1.Index + 1;
 
@@ -31,16 +31,16 @@ for i = 0:99
 end
 ParCorr_Actual_RandomCV_Mean = mean(ParCorr_Actual_RandomCV);
 MAE_Actual_RandomCV_Mean = mean(MAE_Actual_RandomCV);
-save([MotionPrediction_ResFolder_231LeastMotion '/2Fold_RandomCV_ParCorr_MAE_Actual.mat'], 'ParCorr_Actual_RandomCV', 'MAE_Actual_RandomCV', 'ParCorr_Actual_RandomCV_Mean', 'MAE_Actual_RandomCV_Mean');
+save([MotionPrediction_ResFolder_100LeastMotion '/2Fold_RandomCV_ParCorr_MAE_Actual.mat'], 'ParCorr_Actual_RandomCV', 'MAE_Actual_RandomCV', 'ParCorr_Actual_RandomCV_Mean', 'MAE_Actual_RandomCV_Mean');
 
 % Permutation test
-MotionPrediction_Permutation_ResFolder_231LeastMotion = [ReplicationFolder '/Revision/PredictionAnalysis/AtlasLoading/2Fold_RandomCV_Permutation_Motion_231LeastMotion_10FCV'];
+MotionPrediction_Permutation_ResFolder_100LeastMotion = [ReplicationFolder '/Revision/PredictionAnalysis/AtlasLoading/2Fold_RandomCV_Permutation_Motion_100LeastMotion_10FCV'];
 for i = 0:999
     i
-    Prediction_Fold0 = load([MotionPrediction_Permutation_ResFolder_231LeastMotion '/Time_' num2str(i) '/Fold_0_Score.mat']);
+    Prediction_Fold0 = load([MotionPrediction_Permutation_ResFolder_100LeastMotion '/Time_' num2str(i) '/Fold_0_Score.mat']);
     MAE_Permutation_Fold0 = Prediction_Fold0.MAE;
     Index_Fold0 = Prediction_Fold0.Index + 1;
-    Prediction_Fold1 = load([MotionPrediction_Permutation_ResFolder_231LeastMotion '/Time_' num2str(i) '/Fold_1_Score.mat']);
+    Prediction_Fold1 = load([MotionPrediction_Permutation_ResFolder_100LeastMotion '/Time_' num2str(i) '/Fold_1_Score.mat']);
     MAE_Permutation_Fold1 = Prediction_Fold1.MAE;
     Index_Fold1 = Prediction_Fold1.Index + 1;
 
@@ -61,19 +61,19 @@ for i = 0:999
 end
 ParCorr_Permutation_RandomCV_Mean = mean(ParCorr_Permutation_RandomCV);
 MAE_Permutation_RandomCV_Mean = mean(MAE_Permutation_RandomCV);
-save([MotionPrediction_Permutation_ResFolder_231LeastMotion '/2Fold_RandomCV_ParCorr_MAE_Permutation.mat'], 'ParCorr_Permutation_RandomCV', 'MAE_Permutation_RandomCV', 'ParCorr_Permutation_RandomCV_Mean', 'MAE_Permutation_RandomCV_Mean');
+save([MotionPrediction_Permutation_ResFolder_100LeastMotion '/2Fold_RandomCV_ParCorr_MAE_Permutation.mat'], 'ParCorr_Permutation_RandomCV', 'MAE_Permutation_RandomCV', 'ParCorr_Permutation_RandomCV_Mean', 'MAE_Permutation_RandomCV_Mean');
 
 
 % Age prediction
 ReplicationFolder = '/cbica/projects/pncSingleFuncParcel/Replication';
-AgePrediction_ResFolder_231LeastMotion = [ReplicationFolder '/Revision/PredictionAnalysis/AtlasLoading/2Fold_RandomCV_Age_231LeastMotion_10FCV'];
-Behavior = load([AgePrediction_ResFolder_231LeastMotion '/data.mat']);
+AgePrediction_ResFolder_100LeastMotion = [ReplicationFolder '/Revision/PredictionAnalysis/AtlasLoading/2Fold_RandomCV_Age_100LeastMotion_10FCV'];
+Behavior = load([AgePrediction_ResFolder_100LeastMotion '/data.mat']);
 for i = 0:99
     i
-    Prediction_Fold0 = load([AgePrediction_ResFolder_231LeastMotion '/Time_' num2str(i) '/Fold_0_Score.mat']);
+    Prediction_Fold0 = load([AgePrediction_ResFolder_100LeastMotion '/Time_' num2str(i) '/Fold_0_Score.mat']);
     MAE_Actual_Fold0 = Prediction_Fold0.MAE;
     Index_Fold0 = Prediction_Fold0.Index + 1;
-    Prediction_Fold1 = load([AgePrediction_ResFolder_231LeastMotion '/Time_' num2str(i) '/Fold_1_Score.mat']);
+    Prediction_Fold1 = load([AgePrediction_ResFolder_100LeastMotion '/Time_' num2str(i) '/Fold_1_Score.mat']);
     MAE_Actual_Fold1 = Prediction_Fold1.MAE;
     Index_Fold1 = Prediction_Fold1.Index + 1;
 
@@ -94,16 +94,16 @@ for i = 0:99
 end
 ParCorr_Actual_RandomCV_Mean = mean(ParCorr_Actual_RandomCV);
 MAE_Actual_RandomCV_Mean = mean(MAE_Actual_RandomCV);
-save([AgePrediction_ResFolder_231LeastMotion '/2Fold_RandomCV_ParCorr_MAE_Actual.mat'], 'ParCorr_Actual_RandomCV', 'MAE_Actual_RandomCV', 'ParCorr_Actual_RandomCV_Mean', 'MAE_Actual_RandomCV_Mean');
+save([AgePrediction_ResFolder_100LeastMotion '/2Fold_RandomCV_ParCorr_MAE_Actual.mat'], 'ParCorr_Actual_RandomCV', 'MAE_Actual_RandomCV', 'ParCorr_Actual_RandomCV_Mean', 'MAE_Actual_RandomCV_Mean');
 
 % Permutation test
-AgePrediction_Permutation_ResFolder_231LeastMotion = [ReplicationFolder '/Revision/PredictionAnalysis/AtlasLoading/2Fold_RandomCV_Permutation_Age_231LeastMotion_10FCV'];
+AgePrediction_Permutation_ResFolder_100LeastMotion = [ReplicationFolder '/Revision/PredictionAnalysis/AtlasLoading/2Fold_RandomCV_Permutation_Age_100LeastMotion_10FCV'];
 for i = 0:999
     i
-    Prediction_Fold0 = load([AgePrediction_Permutation_ResFolder_231LeastMotion '/Time_' num2str(i) '/Fold_0_Score.mat']);
+    Prediction_Fold0 = load([AgePrediction_Permutation_ResFolder_100LeastMotion '/Time_' num2str(i) '/Fold_0_Score.mat']);
     MAE_Permutation_Fold0 = Prediction_Fold0.MAE;
     Index_Fold0 = Prediction_Fold0.Index + 1;
-    Prediction_Fold1 = load([AgePrediction_Permutation_ResFolder_231LeastMotion '/Time_' num2str(i) '/Fold_1_Score.mat']);
+    Prediction_Fold1 = load([AgePrediction_Permutation_ResFolder_100LeastMotion '/Time_' num2str(i) '/Fold_1_Score.mat']);
     MAE_Permutation_Fold1 = Prediction_Fold1.MAE;
     Index_Fold1 = Prediction_Fold1.Index + 1;
 
@@ -124,6 +124,6 @@ for i = 0:999
 end
 ParCorr_Permutation_RandomCV_Mean = mean(ParCorr_Permutation_RandomCV);
 MAE_Permutation_RandomCV_Mean = mean(MAE_Permutation_RandomCV);
-save([AgePrediction_Permutation_ResFolder_231LeastMotion '/2Fold_RandomCV_ParCorr_MAE_Permutation.mat'], 'ParCorr_Permutation_RandomCV', 'MAE_Permutation_RandomCV', 'ParCorr_Permutation_RandomCV_Mean', 'MAE_Permutation_RandomCV_Mean');
+save([AgePrediction_Permutation_ResFolder_100LeastMotion '/2Fold_RandomCV_ParCorr_MAE_Permutation.mat'], 'ParCorr_Permutation_RandomCV', 'MAE_Permutation_RandomCV', 'ParCorr_Permutation_RandomCV_Mean', 'MAE_Permutation_RandomCV_Mean');
 
 
